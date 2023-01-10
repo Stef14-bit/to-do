@@ -20,6 +20,17 @@ function App() {
     setTodos([...todos].filter((s) => s.id !== e.id));
   };
 
+  const handleComplete = (e) => {
+    setTodos(
+      [...todos].map((s) => {
+        if (s.id === e.id) {
+          s.completed = !s.completed;
+        }
+        return s;
+      })
+    );
+  };
+
   const handleTodoSubmit = () => {
     setTodos([...todos, todo]);
     setTodo((prevState) => ({ ...prevState, title: "" }));
@@ -37,7 +48,11 @@ function App() {
             <hr />
             <li>{e.id.split("-")[0]}</li>
             <li>{e.title}</li>
-            <li>{e.completed ? "completed" : "not completed"}</li>
+            <li>
+              <button onClick={() => handleComplete(e)}>
+                {e.completed ? "completed" : "not completed"}
+              </button>
+            </li>
             <li>
               <button onClick={() => handleRemove(e)}>x</button>
             </li>
