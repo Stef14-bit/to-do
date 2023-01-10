@@ -16,6 +16,9 @@ function App() {
   const handleTodoChange = (e) => {
     setTodo((prevState) => ({ ...prevState, id: id, title: e.target.value }));
   };
+  const handleRemove = (e) => {
+    setTodos([...todos].filter((s) => s.id !== e.id));
+  };
 
   const handleTodoSubmit = () => {
     setTodos([...todos, todo]);
@@ -31,9 +34,13 @@ function App() {
         </form>
         {todos.map((e, i) => (
           <ul>
+            <hr />
             <li>{e.id.split("-")[0]}</li>
             <li>{e.title}</li>
-            <li>{e.completed}</li>
+            <li>{e.completed ? "completed" : "not completed"}</li>
+            <li>
+              <button onClick={() => handleRemove(e)}>x</button>
+            </li>
           </ul>
         ))}
       </div>
